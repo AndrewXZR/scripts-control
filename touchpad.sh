@@ -20,11 +20,11 @@ toggle_touchpad() {
     state=$(xinput list-props "$touchpad" | grep 'Device Enabled' | awk '{print $NF}')
 
     if [ "$state" -eq 1 ]; then
-        xinput --disable "$touchpad" && notify-send -t 3000 "Touchpad" "Disabled"
+        xinput --disable "$touchpad" && notify-send -t 3000 -i "input-touchpad" "Touchpad" "Disabled"
     elif [ "$state" -eq 0 ]; then
-        xinput enable "$touchpad" && notify-send -t 3000 "Touchpad" "Enabled"
+        xinput enable "$touchpad" && notify-send -t 3000 -i "input-touchpad" "Touchpad" "Enabled"
     else
-        notify-send -t 3000 "Touchpad" "Unknown state: $state"
+        notify-send -t 3000 -i "input-touchpad" "Touchpad" "Unknown state: $state"
     fi
 }
 
@@ -33,7 +33,7 @@ main() {
     touchpad=$(get_touchpad_name)
 
     if [ -z "$touchpad" ]; then
-        notify-send -t 3000 "Touchpad" "Not found"
+        notify-send -t 3000 -i "input-touchpad" "Touchpad" "Not found"
         exit 1
     fi
 
