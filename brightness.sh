@@ -2,7 +2,7 @@
 
 # Validate entry
 if [[ "$1" != "up" && "$1" != "down" ]]; then
-    echo "Uso: $0 [up|down]"
+    notify-send -t 3000 --replace-id=1 -i dialog-error "Brightness" "Usage: $0 [up|down]"
     exit 1
 fi
 
