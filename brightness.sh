@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Validate entry
+if [[ "$1" != "up" && "$1" != "down" ]]; then
+    echo "Uso: $0 [up|down]"
+    exit 1
+fi
+
 # Path to the brightness file
 BRIGHTNESS_FILE="/sys/class/backlight/intel_backlight/brightness"
 
@@ -8,12 +14,6 @@ MAX_BRIGHTNESS=$(cat /sys/class/backlight/intel_backlight/max_brightness)
 
 # Brightness adjustment steps
 STEP=1000
-
-# Validate entry
-if [[ "$1" != "up" && "$1" != "down" ]]; then
-    echo "Uso: $0 [up|down]"
-    exit 1
-fi
 
 # Get current brightness
 CURRENT_BRIGHTNESS=$(cat "$BRIGHTNESS_FILE")
@@ -33,4 +33,4 @@ NEW_BRIGHTNESS=$(($NEW_BRIGHTNESS > $MAX_BRIGHTNESS ? $MAX_BRIGHTNESS : $NEW_BRI
 echo $NEW_BRIGHTNESS | sudo tee "$BRIGHTNESS_FILE" > /dev/null
 
 # Notify the change
-notify-send -t 3000 -i display-brightness "Brightness" "Adjusted to $((NEW_BRIGHTNESS * 100 / MAX_BRIGHTNESS))%"
+notify-send -t 3000 --replace-id=1 -i display-brightness "Brightness" "Adjusted to $((NEW_BRIGHTNESS * 100 / MAX_BRIGHTNESS))%"
