@@ -8,6 +8,13 @@ This repository contains a set of lightweight shell scripts to control various s
 - **Volume Control**: Increases, decreases, or mutes the volume.
 - **Brightness Control**: Increases or decreases the screen brightness.
 
+## Requirements
+
+- **alsamixer**: Required for sound key combinations.
+- **xinput**: Required for touchpad management.
+- **notify-send**: Required for desktop notifications.
+- **light**: Required for brightness.
+
 ## Installation
 
 1. Clone the repository:
